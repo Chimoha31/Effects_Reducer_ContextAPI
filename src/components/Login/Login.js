@@ -12,16 +12,17 @@ const Login = (props) => {
   const [formIsValid, setFormIsValid] = useState(false);
 
   useEffect(() => {
-    setTimeout(() => {
+    const identifier = setTimeout(() => {
       console.log("Checking");
       setFormIsValid(
         enteredEmail.includes("@") && enteredPassword.trim().length > 6
       );
     }, 1000);
-    //clean up functinは必ずreturnでfunctionを返す
+    //clean up functionは必ずreturnでfunctionを返す
     // (useEffect()が次に2回目以降に実行される前に下が走る)
     return () => {
       console.log('Clean Up');
+      clearTimeout(identifier);
     }
   }, [enteredEmail, enteredPassword]);
 
